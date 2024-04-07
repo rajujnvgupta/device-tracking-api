@@ -13,17 +13,17 @@ def deviceEntity(db_item) -> dict:
     }
 
 def listOfDeviceEntity(db_item_list) -> list:
-    list_student_entity = []
+    list_device_entity = []
     for item in db_item_list:
-        list_student_entity.append(deviceEntity(item))
+        list_device_entity.append(deviceEntity(item))
 
-    return list_student_entity
+    return list_device_entity
 
 
 
-    device_fk_id :  str
-    latitude :  str
-    longitude:  str
-    timme_stamp: datetime
-    sts        : datetime
-    speed      : int
+#    device_fk_id :  str
+#    latitude :  str
+#    longitude:  str
+#    timme_stamp: datetime
+#    sts        : datetime
+#    speed      : int
