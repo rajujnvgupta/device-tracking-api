@@ -16,8 +16,8 @@
 
 
 # STEP 3 ->  clone code from my github
-    git clone GITHUT url
-
+    git clone https://github.com/rajujnvgupta/device-tracking-api.git
+    
 # STEP 5 -> start redis on default --port 6379
 
     sudo systemctl start redis
