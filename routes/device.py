@@ -29,7 +29,7 @@ async def hello_world():
 redis_conn = None
 
 @device_router.get('/device_curr_info/{device_fk_id}')
-async def find_student_by_id(device_fk_id):
+async def find_device_curr_info_by_id(device_fk_id):
 
     '''getting latest info for {device_fk_id} from redis if not in redis then read from database and set into redis'''
 
@@ -74,8 +74,8 @@ async def find_device_info(device_fk_id):
         return location_info
 
 #getting device location between start_time and end_time
-@device_router.get('/device_track_location/{device_fk_id}/{start_time}/{end_time}')
-async def find_student_by_id(device_fk_id, start_time, end_time):
+@device_router.get('/track_device_location/{device_fk_id}/{start_time}/{end_time}')
+async def find_track_device_location(device_fk_id, start_time, end_time):
 
     '''tracking device location using {time_stamp} between start_time and end_time for particular device id'''
     start_time = parser.isoparse(start_time)
