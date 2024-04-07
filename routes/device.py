@@ -10,6 +10,7 @@ import json
 import pickle
 import re
 from dateutil import parser
+from datetime import datetime
 
 
 from bson import ObjectId
@@ -21,6 +22,11 @@ redis_conn = None
 def redis_connection():
     redis_conn = BaseCache(**settings.REDIS_CACHE_DB)
 
+def json_serialize(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, datetime):
+        return obj.isoformat()
 
 
 @device_router.get('/hello')
@@ -40,12 +46,12 @@ async def find_device_curr_info_by_id(device_fk_id):
     if data:
         print("device info found in redis")
         data = data.decode('utf8')
-        return data
+        return json.loads(data)
     else:
         data = listOfDeviceEntity(connection.local.DeviceInfo.find({"device_fk_id": int(device_fk_id)}).sort("time_stamp", -1).limit(1))[0]
         if data:
             print("device info fetched from database")
-            redis_conn.set(device_fk_id, str(data))
+            redis_conn.set(device_fk_id, json.dumps(data , default=json_serialize).encode('utf-8'))
             return data
     dict_data = deviceEntity(connection.local.DeviceInfo.find_one({"device_fk_id": int(device_fk_id)}))
     return dict_data
@@ -62,14 +68,14 @@ async def find_device_info(device_fk_id):
     device_fk_id_key = device_fk_id + "_key"
     data = redis_conn.get(device_fk_id_key)
     if data:
-        data = data.decode('utf8')
-        return data
+        data = data.decode('utf-8')
+        return json.loads(data)
     else:
         data = listOfDeviceEntity(connection.local.DeviceInfo.find({"device_fk_id": int(device_fk_id)}).sort("time_stamp", -1).limit(1))[0]
         location_info = {"latitude" : data["latitude"], "longitude" : data["longitude"]}
         if data:
             print("device location fetched from databse")
-            redis_conn.set(device_fk_id_key, str(location_info))
+            redis_conn.set(device_fk_id_key, json.dumps(location_info).encode('utf-8'))
 
         return location_info
 

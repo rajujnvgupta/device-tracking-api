@@ -21,9 +21,9 @@ def listOfDeviceEntity(db_item_list) -> list:
 
 
 
-#    device_fk_id :  str
-#    latitude :  str
-#    longitude:  str
-#    timme_stamp: datetime
-#    sts        : datetime
-#    speed      : int
+    # device_fk_id :  str
+    # latitude :  str
+    # longitude:  str
+    # timme_stamp: datetime
+    # sts        : datetime
+    # speed      : int
