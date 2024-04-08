@@ -86,5 +86,7 @@ async def find_track_device_location(device_fk_id, start_time, end_time):
     '''tracking device location using {time_stamp} between start_time and end_time for particular device id'''
     start_time = parser.isoparse(start_time)
     end_time = parser.isoparse(end_time)
-    return listOfDeviceEntity(connection.local.DeviceInfo.find({"time_stamp": {'$gte': start_time, '$lt': end_time}}))
+    return connection.local.DeviceInfo.find({"device_fk_id": int(device_fk_id), "time_stamp": {'$gte': start_time, '$lt': end_time}})
+
+    # return listOfDeviceEntity(connection.local.DeviceInfo.find({"time_stamp": {'$gte': start_time, '$lt': end_time}}).itcount())
 
