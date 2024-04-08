@@ -17,7 +17,7 @@
 
 # STEP 3 ->  clone code from my github
     git clone https://github.com/rajujnvgupta/device-tracking-api.git
-    
+
 # STEP 5 -> start redis on default --port 6379
 
     sudo systemctl start redis
@@ -45,19 +45,14 @@ FastAPI is very fast in term of development and performence because it is build 
 
 # Note
 # hosted and tested on ubuntu 20.04 machine
-#######################################################################################################################
 
 
+# API endpoints
 
+# 1
+    /device_curr_info/{device_fk_id}
+# 2
+    /device_curr_info/{device_fk_id}
+# 3
+    /track_device_location/{device_fk_id}/{start_time}/{end_time}
 
-#sudo su -
-#Then run:
-#
-#passwd ubuntu
-#It is going to prompt :
-#
-#Enter new UNIX password:
-#
-#sudo apt install redis
-#sudo systemctl status redis
-#
